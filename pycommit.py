@@ -1,5 +1,5 @@
 """
-This script grab your commit message
+This script grabs your commit message
 and suggest a commit label;
 example:
     branch_name = TEAM-123456
