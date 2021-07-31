@@ -73,7 +73,7 @@ def get_commit_label(msg: str):
     return label or "[DEV]"
 
 
-def pycommit(msg: str, skip_asserts: bool = False):
+def pycommit(msg: str):
     # get branch id
     a = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
     a = a.decode('utf-8')
@@ -81,9 +81,7 @@ def pycommit(msg: str, skip_asserts: bool = False):
     p = re.compile("TEAM-[\d]+")
     o = re.search(p, a)
     label = get_commit_label(msg)
-    if o is None and not skip_asserts:
-        assert 0, 'regex does not fit branch name'
-    elif o is None:
+    if o is None:
         s = '['+a+']'+label+' '+msg
     else:
         s = o.group(0)
